@@ -1,664 +1,931 @@
 "use strict";
 
 
-/* =============================================================
-   GRAMACART / NOVA — MAIN JAVASCRIPT
-============================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-
-    /* =========================================================
-       VIDEO
-    ========================================================== */
-
-    const heroVideo =
-        document.querySelector(".video-hero__media");
+/* =========================================================
+   CECI & SIP
+   MAIN JAVASCRIPT
+========================================================= */
 
 
-    const reducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        );
+/*
+   IMPORTANT
+
+   Replace this number with the real
+   Ceci & Sip WhatsApp number.
+
+   Example:
+   919876543210
+*/
+
+const WHATSAPP_NUMBER =
+    "917019049479";
 
 
-    if (heroVideo) {
 
-        /*
-         * Autoplay is muted intentionally.
-         * Browsers generally block autoplay with sound.
-         */
+/* =========================================================
+   WHATSAPP LINK
+========================================================= */
 
-        const startVideo = () => {
+function createWhatsAppLink(message) {
 
-            if (reducedMotion.matches) {
-                heroVideo.pause();
-                return;
+    return (
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(message)
+    );
+
+}
+
+
+
+/* =========================================================
+   DOM READY
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        /* =================================================
+           REDUCED MOTION
+        ================================================= */
+
+        const reducedMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+
+
+        /* =================================================
+           WHATSAPP
+        ================================================= */
+
+        const whatsappFloat =
+            document.getElementById(
+                "whatsappFloat"
+            );
+
+
+        if (whatsappFloat) {
+
+            whatsappFloat.href =
+                createWhatsAppLink(
+                    "Hi! I'd like to place an order at Ceci & Sip."
+                );
+
+        }
+
+
+        const whatsappCta =
+            document.getElementById(
+                "whatsappCta"
+            );
+
+
+        if (whatsappCta) {
+
+            whatsappCta.href =
+                createWhatsAppLink(
+                    "Hi! I'd like to place an order at Ceci & Sip."
+                );
+
+        }
+
+
+
+        /* =================================================
+           HERO VIDEO
+        ================================================= */
+
+        const heroVideo =
+            document.querySelector(
+                ".hero-video"
+            );
+
+
+        if (heroVideo) {
+
+            function playHeroVideo() {
+
+                if (
+                    reducedMotion.matches
+                ) {
+
+                    heroVideo.pause();
+
+                    return;
+
+                }
+
+
+                const promise =
+                    heroVideo.play();
+
+
+                if (promise) {
+
+                    promise.catch(
+                        () => {}
+                    );
+
+                }
+
             }
 
-            const playPromise =
-                heroVideo.play();
 
-            if (playPromise !== undefined) {
+            if (
+                heroVideo.readyState >= 2
+            ) {
 
-                playPromise.catch(() => {
-                    /*
-                     * Autoplay may be blocked.
-                     * Poster image remains as fallback.
-                     */
-                });
+                playHeroVideo();
+
+            } else {
+
+                heroVideo.addEventListener(
+                    "loadeddata",
+                    playHeroVideo,
+                    {
+                        once: true
+                    }
+                );
 
             }
 
-        };
 
+            document.addEventListener(
+                "visibilitychange",
+                () => {
 
-        if (heroVideo.readyState >= 2) {
+                    if (
+                        document.hidden
+                    ) {
 
-            startVideo();
+                        heroVideo.pause();
 
-        } else {
+                    } else {
 
-            heroVideo.addEventListener(
-                "loadeddata",
-                startVideo,
-                { once: true }
+                        playHeroVideo();
+
+                    }
+
+                }
             );
 
         }
 
 
-        /*
-         * Save battery / CPU when the tab
-         * is not visible.
-         */
 
-        document.addEventListener(
-            "visibilitychange",
-            () => {
+        /* =================================================
+           DRESSING DATA
+        ================================================= */
 
-                if (document.hidden) {
+        const dressings = {
 
-                    heroVideo.pause();
+            minty: {
 
-                } else {
+                name: "MINTY",
 
-                    startVideo();
+                displayName: "Minty",
 
-                }
+                number: "01",
+
+                mood:
+                    "FRESH / CREAMY / HERBY",
+
+                copy:
+                    "Mint, plain yogurt, lemon, black pepper, salt, oregano and olive oil.",
+
+                image:
+                    "images/dish.jpg",
+
+                available: true
+
+            },
+
+
+            pane: {
+
+                name: "PANE",
+
+                displayName: "Pane",
+
+                number: "02",
+
+                mood:
+                    "CREAMY / ZESTY / RICH",
+
+                copy:
+                    "Paneer, olive oil, lemon, black pepper, salt, oregano and a touch of red colour.",
+
+                image:
+                    "images/hero-dish.jpg",
+
+                available: true
+
+            },
+
+
+            three: {
+
+                name: "COMING SOON",
+
+                displayName: "Coming soon",
+
+                number: "03",
+
+                mood:
+                    "A NEW FLAVOUR",
+
+                copy:
+                    "A new flavour is on its way.",
+
+                image:
+                    "images/dish.jpg",
+
+                available: false
+
+            },
+
+
+            four: {
+
+                name: "COMING SOON",
+
+                displayName: "Coming soon",
+
+                number: "04",
+
+                mood:
+                    "SOMETHING FRESH",
+
+                copy:
+                    "Something fresh is brewing.",
+
+                image:
+                    "images/dish.jpg",
+
+                available: false
+
+            },
+
+
+            five: {
+
+                name: "COMING SOON",
+
+                displayName: "Coming soon",
+
+                number: "05",
+
+                mood:
+                    "NEXT FAVOURITE",
+
+                copy:
+                    "Your next favourite might be this one.",
+
+                image:
+                    "images/dish.jpg",
+
+                available: false
 
             }
-        );
-
-    }
-
-
-
-    /* =========================================================
-       INGREDIENT PANELS
-    ========================================================== */
-
-    const productImages =
-        document.querySelectorAll(
-            ".product-image"
-        );
-
-
-    const closeAllIngredientPanels =
-        () => {
-
-            productImages.forEach(
-                (product) => {
-
-                    product.classList.remove(
-                        "ingredients-open"
-                    );
-
-
-                    const hitArea =
-                        product.querySelector(
-                            ".dish-hit-area"
-                        );
-
-
-                    const panel =
-                        product.querySelector(
-                            ".ingredient-panel"
-                        );
-
-
-                    if (hitArea) {
-
-                        hitArea.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-
-
-                    if (panel) {
-
-                        panel.setAttribute(
-                            "aria-hidden",
-                            "true"
-                        );
-
-                    }
-
-                }
-            );
 
         };
 
 
 
-    productImages.forEach(
-        (product) => {
+        /* =================================================
+           DRESSING ELEMENTS
+        ================================================= */
+
+        const dressingButtons =
+            document.querySelectorAll(
+                ".dressing-option"
+            );
 
 
-            const hitArea =
-                product.querySelector(
-                    ".dish-hit-area"
-                );
+        const dressingImage =
+            document.getElementById(
+                "dressingImage"
+            );
 
 
-            const closeButton =
-                product.querySelector(
-                    ".ingredient-close"
-                );
+        const dressingStamp =
+            document.getElementById(
+                "dressingStamp"
+            );
 
 
-            const panel =
-                product.querySelector(
-                    ".ingredient-panel"
-                );
+        const dressingNumber =
+            document.getElementById(
+                "dressingNumber"
+            );
 
 
-            if (!hitArea || !panel) {
+        const dressingLabel =
+            document.getElementById(
+                "dressingLabel"
+            );
+
+
+        const dressingMood =
+            document.getElementById(
+                "dressingMood"
+            );
+
+
+        const dressingCopy =
+            document.getElementById(
+                "dressingCopy"
+            );
+
+
+        const chooseDressing =
+            document.getElementById(
+                "chooseDressing"
+            );
+
+
+        const chooseDressingName =
+            document.getElementById(
+                "chooseDressingName"
+            );
+
+
+        let selectedDressing =
+            "minty";
+
+
+
+        /* =================================================
+           UPDATE DRESSING
+        ================================================= */
+
+        function updateDressing(key) {
+
+            const dressing =
+                dressings[key];
+
+
+            if (!dressing) {
                 return;
             }
 
 
-
-            /* OPEN */
-
-            const openPanel = () => {
-
-                /*
-                 * Only one product panel should
-                 * remain open at a time.
-                 */
-
-                closeAllIngredientPanels();
+            selectedDressing =
+                key;
 
 
-                product.classList.add(
-                    "ingredients-open"
-                );
+            /* Buttons */
+
+            dressingButtons.forEach(
+                (button) => {
+
+                    const isActive =
+                        button.dataset.dressing ===
+                        key;
 
 
-                hitArea.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
+                    button.classList.toggle(
+                        "active",
+                        isActive
+                    );
 
 
-                panel.setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
+                    button.setAttribute(
+                        "aria-selected",
+                        isActive
+                            ? "true"
+                            : "false"
+                    );
 
-            };
-
-
-
-            /* CLOSE */
-
-            const closePanel = () => {
-
-                product.classList.remove(
-                    "ingredients-open"
-                );
-
-
-                hitArea.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                panel.setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
-            };
-
-
-
-            hitArea.addEventListener(
-                "click",
-                openPanel
+                }
             );
+
+
+            /* Image */
+
+            if (dressingImage) {
+
+                dressingImage.style.opacity =
+                    "0";
+
+
+                setTimeout(
+                    () => {
+
+                        dressingImage.src =
+                            dressing.image;
+
+
+                        dressingImage.alt =
+                            `Ceci Bowl with ${dressing.displayName} dressing`;
+
+
+                        dressingImage.style.opacity =
+                            "1";
+
+                    },
+                    reducedMotion.matches
+                        ? 0
+                        : 130
+                );
+
+            }
+
+
+            /* Number */
+
+            if (dressingNumber) {
+
+                dressingNumber.textContent =
+                    dressing.number;
+
+            }
+
+
+            /* Name */
+
+            if (dressingStamp) {
+
+                dressingStamp.textContent =
+                    dressing.name;
+
+            }
+
+
+            if (dressingLabel) {
+
+                dressingLabel.textContent =
+                    dressing.name;
+
+            }
+
+
+            /* Mood */
+
+            if (dressingMood) {
+
+                dressingMood.textContent =
+                    dressing.mood;
+
+            }
+
+
+            /* Description */
+
+            if (dressingCopy) {
+
+                dressingCopy.textContent =
+                    dressing.copy;
+
+            }
+
+
+            /* Choose button */
+
+            if (chooseDressingName) {
+
+                chooseDressingName.textContent =
+                    dressing.displayName;
+
+            }
+
+
+            if (chooseDressing) {
+
+                chooseDressing.disabled =
+                    !dressing.available;
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           DRESSING BUTTON EVENTS
+        ================================================= */
+
+        dressingButtons.forEach(
+            (button) => {
+
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        updateDressing(
+                            button.dataset.dressing
+                        );
+
+                    }
+                );
+
+
+                button.addEventListener(
+                    "keydown",
+                    (event) => {
+
+                        if (
+                            event.key !== "ArrowDown" &&
+                            event.key !== "ArrowUp"
+                        ) {
+                            return;
+                        }
+
+
+                        event.preventDefault();
+
+
+                        const buttons =
+                            [...dressingButtons];
+
+
+                        const current =
+                            buttons.indexOf(
+                                button
+                            );
+
+
+                        const direction =
+                            event.key ===
+                            "ArrowDown"
+                                ? 1
+                                : -1;
+
+
+                        const next =
+                            (
+                                current +
+                                direction +
+                                buttons.length
+                            ) %
+                            buttons.length;
+
+
+                        buttons[next].focus();
+
+
+                        updateDressing(
+                            buttons[next]
+                                .dataset
+                                .dressing
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =================================================
+           ORDER SELECTED DRESSING
+        ================================================= */
+
+        if (chooseDressing) {
+
+            chooseDressing.addEventListener(
+                "click",
+                () => {
+
+                    const dressing =
+                        dressings[
+                            selectedDressing
+                        ];
+
+
+                    if (
+                        !dressing ||
+                        !dressing.available
+                    ) {
+                        return;
+                    }
+
+
+                    const message =
+                        `Hi! I'd like to order a Ceci Bowl with ${dressing.displayName} dressing.`;
+
+
+                    window.open(
+                        createWhatsAppLink(
+                            message
+                        ),
+                        "_blank",
+                        "noopener"
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           INGREDIENT MODAL
+        ================================================= */
+
+        const modal =
+            document.getElementById(
+                "ingredientModal"
+            );
+
+
+        const modalTitle =
+            document.getElementById(
+                "ingredientModalTitle"
+            );
+
+
+        const ingredientList =
+            modal
+                ? modal.querySelector(
+                    ".ingredient-list"
+                )
+                : null;
+
+
+        let lastFocused =
+            null;
+
+
+
+        /* =================================================
+           OPEN MODAL
+        ================================================= */
+
+        function openIngredientModal(
+            trigger
+        ) {
+
+            if (
+                !modal ||
+                !ingredientList
+            ) {
+                return;
+            }
+
+
+            lastFocused =
+                document.activeElement;
+
+
+            modalTitle.textContent =
+                trigger.dataset.dish || "";
+
+
+            ingredientList.innerHTML =
+                "";
+
+
+            const ingredients =
+                (
+                    trigger.dataset.ingredients ||
+                    ""
+                )
+                    .split("|")
+                    .map(
+                        item =>
+                            item.trim()
+                    )
+                    .filter(Boolean);
+
+
+            ingredients.forEach(
+                ingredient => {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    li.textContent =
+                        ingredient;
+
+
+                    ingredientList.appendChild(
+                        li
+                    );
+
+                }
+            );
+
+
+            modal.classList.add(
+                "open"
+            );
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            const closeButton =
+                modal.querySelector(
+                    ".modal-close"
+                );
 
 
             if (closeButton) {
 
-                closeButton.addEventListener(
-                    "click",
-                    (event) => {
+                closeButton.focus();
 
-                        event.stopPropagation();
+            }
 
-                        closePanel();
+        }
+
+
+
+        /* =================================================
+           CLOSE MODAL
+        ================================================= */
+
+        function closeIngredientModal() {
+
+            if (!modal) {
+                return;
+            }
+
+
+            modal.classList.remove(
+                "open"
+            );
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.style.overflow =
+                "";
+
+
+            if (lastFocused) {
+
+                lastFocused.focus();
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           INGREDIENT BUTTONS
+        ================================================= */
+
+        document
+            .querySelectorAll(
+                ".ingredient-button"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            openIngredientModal(
+                                button
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* =================================================
+           CLOSE MODAL
+        ================================================= */
+
+        if (modal) {
+
+            modal
+                .querySelectorAll(
+                    "[data-close-modal]"
+                )
+                .forEach(
+                    element => {
+
+                        element.addEventListener(
+                            "click",
+                            closeIngredientModal
+                        );
 
                     }
                 );
 
-            }
-
-
-
-            /*
-             * Keyboard support.
-             */
-
-            product.addEventListener(
-                "keydown",
-                (event) => {
-
-                    if (
-                        event.key === "Escape" &&
-                        product.classList.contains(
-                            "ingredients-open"
-                        )
-                    ) {
-
-                        closePanel();
-
-                    }
-
-                }
-            );
-
         }
-    );
 
 
 
-    /* =========================================================
-       PRODUCT TEXT BUTTONS
-    ========================================================== */
+        /* =================================================
+           ESCAPE
+        ================================================= */
 
-    const ingredientTriggers =
-        document.querySelectorAll(
-            "[data-open-ingredients]"
-        );
+        document.addEventListener(
+            "keydown",
+            event => {
 
+                if (
+                    event.key === "Escape"
+                ) {
 
-    ingredientTriggers.forEach(
-        (trigger, index) => {
-
-            trigger.addEventListener(
-                "click",
-                () => {
-
-                    const product =
-                        productImages[index];
-
-                    if (!product) {
-                        return;
-                    }
-
-
-                    const hitArea =
-                        product.querySelector(
-                            ".dish-hit-area"
-                        );
-
-
-                    if (hitArea) {
-
-                        hitArea.click();
-
-                        product.scrollIntoView({
-                            behavior:
-                                reducedMotion.matches
-                                    ? "auto"
-                                    : "smooth",
-                            block: "center"
-                        });
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-
-    /* =========================================================
-       HEADER — LIGHT/DARK AUTOMATIC STATE
-    ========================================================== */
-
-    const header =
-        document.querySelector(
-            ".site-header"
-        );
-
-
-    const videoSection =
-        document.querySelector(
-            ".video-hero"
-        );
-
-
-    /*
-     * Header is initially white because
-     * the opening hero is dark.
-     *
-     * When the user scrolls into the light
-     * sections, add a subtle dark state.
-     */
-
-    if (header && videoSection) {
-
-        const updateHeader =
-            () => {
-
-                const threshold =
-                    videoSection.offsetHeight - 100;
-
-
-                if (window.scrollY > threshold) {
-
-                    header.classList.add(
-                        "header-light"
-                    );
-
-                } else {
-
-                    header.classList.remove(
-                        "header-light"
-                    );
+                    closeIngredientModal();
 
                 }
 
-            };
-
-
-        window.addEventListener(
-            "scroll",
-            updateHeader,
-            {
-                passive: true
             }
         );
 
 
-        updateHeader();
 
-    }
+        /* =================================================
+           SMOOTH LINKS
+        ================================================= */
 
+        document
+            .querySelectorAll(
+                'a[href^="#"]'
+            )
+            .forEach(
+                link => {
 
+                    link.addEventListener(
+                        "click",
+                        event => {
 
-    /* =========================================================
-       SMOOTH INTERNAL LINKS
-    ========================================================== */
-
-    const internalLinks =
-        document.querySelectorAll(
-            'a[href^="#"]'
-        );
-
-
-    internalLinks.forEach(
-        (link) => {
-
-            link.addEventListener(
-                "click",
-                (event) => {
-
-                    const targetId =
-                        link.getAttribute("href");
+                            const id =
+                                link.getAttribute(
+                                    "href"
+                                );
 
 
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
+                            if (
+                                !id ||
+                                id === "#"
+                            ) {
+                                return;
+                            }
 
 
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
+                            const target =
+                                document.querySelector(
+                                    id
+                                );
 
 
-                    if (!target) {
-                        return;
-                    }
+                            if (!target) {
+                                return;
+                            }
 
 
-                    event.preventDefault();
+                            event.preventDefault();
 
 
-                    target.scrollIntoView({
-                        behavior:
-                            reducedMotion.matches
-                                ? "auto"
-                                : "smooth",
-                        block: "start"
-                    });
+                            target.scrollIntoView(
+                                {
+                                    behavior:
+                                        reducedMotion.matches
+                                            ? "auto"
+                                            : "smooth",
+
+                                    block:
+                                        "start"
+                                }
+                            );
+
+                        }
+                    );
 
                 }
             );
 
-        }
-    );
 
 
+        /* =================================================
+           INITIAL DRESSING
+        ================================================= */
 
-    /* =========================================================
-       IMAGE ERROR FALLBACK
-    ========================================================== */
+        updateDressing("minty");
 
-    document
-        .querySelectorAll("img")
-        .forEach((image) => {
-
-            image.addEventListener(
-                "error",
-                () => {
-
-                    image.classList.add(
-                        "image-error"
-                    );
-
-                },
-                { once: true }
-            );
-
-        });
-
-
-});
-
-
-js
-/* =========================================================
-   INGREDIENT IMAGE TOGGLE
-   Tap image → ingredients
-   Tap again → image
-========================================================= */
-
-const productImages = document.querySelectorAll(".product-image");
-
-
-function closeIngredients(productImage) {
-
-    if (!productImage) return;
-
-    productImage.classList.remove("ingredients-open");
-
-    const hitArea =
-        productImage.querySelector(".dish-hit-area");
-
-    const panel =
-        productImage.querySelector(".ingredient-panel");
-
-    if (hitArea) {
-        hitArea.setAttribute(
-            "aria-expanded",
-            "false"
-        );
     }
-
-    if (panel) {
-        panel.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-    }
-}
-
-
-function openIngredients(productImage) {
-
-    if (!productImage) return;
-
-    /* Close other open products */
-
-    productImages.forEach(otherProduct => {
-
-        if (otherProduct !== productImage) {
-            closeIngredients(otherProduct);
-        }
-
-    });
-
-
-    productImage.classList.add("ingredients-open");
-
-    const hitArea =
-        productImage.querySelector(".dish-hit-area");
-
-    const panel =
-        productImage.querySelector(".ingredient-panel");
-
-    if (hitArea) {
-        hitArea.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-    }
-
-    if (panel) {
-        panel.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-    }
-
-}
-
-
-/* =========================================================
-   IMAGE CLICK / TAP
-========================================================= */
-
-productImages.forEach(productImage => {
-
-    const hitArea =
-        productImage.querySelector(".dish-hit-area");
-
-
-    if (!hitArea) return;
-
-
-    hitArea.addEventListener("click", () => {
-
-        const isOpen =
-            productImage.classList.contains(
-                "ingredients-open"
-            );
-
-
-        if (isOpen) {
-
-            /* Already showing ingredients
-               → bring image back */
-
-            closeIngredients(productImage);
-
-        } else {
-
-            /* Showing image
-               → reveal ingredients */
-
-            openIngredients(productImage);
-
-        }
-
-    });
-
-});
-
-
-/* =========================================================
-   PRODUCT TEXT BUTTON
-   "Explore the dish" / "Discover the drink"
-========================================================= */
-
-const ingredientTriggers =
-    document.querySelectorAll(
-        "[data-open-ingredients]"
-    );
-
-
-ingredientTriggers.forEach(trigger => {
-
-    trigger.addEventListener("click", () => {
-
-        const productStage =
-            trigger.closest(".product-stage");
-
-        if (!productStage) return;
-
-
-        const productImage =
-            productStage.querySelector(".product-image");
-
-        if (!productImage) return;
-
-
-        openIngredients(productImage);
-
-    });
-
-});
-
-
-/* =========================================================
-   ESCAPE KEY
-========================================================= */
-
-document.addEventListener("keydown", event => {
-
-    if (event.key !== "Escape") return;
-
-
-    productImages.forEach(productImage => {
-
-        closeIngredients(productImage);
-
-    });
-
-});
-
-
+);
