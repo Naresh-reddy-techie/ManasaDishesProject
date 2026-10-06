@@ -1,931 +1,164 @@
 "use strict";
+/* CECI & SIP — main script */
+const WA_NUMBER = "917019049479";
+const WA_DEFAULT = "Hi! I'd like to place an order at Ceci & Sip.";
+const waLink = (m) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(m)}`;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* WhatsApp links */
+$$("[data-wa]").forEach((a) => (a.href = waLink(WA_DEFAULT)));
 
-/* =========================================================
-   CECI & SIP
-   MAIN JAVASCRIPT
-========================================================= */
+/* Mobile menu */
+const burger = $("#burger"), navLinks = $("#navLinks");
+function toggleMenu(open) {
+  navLinks.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", String(open));
+  burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+}
+burger.addEventListener("click", () => toggleMenu(!navLinks.classList.contains("open")));
+$$("a", navLinks).forEach((a) => a.addEventListener("click", () => toggleMenu(false)));
+document.addEventListener("click", (e) => { if (!e.target.closest(".nav")) toggleMenu(false); });
 
+/* Search */
+const cards = $$(".product-card"), groups = $$(".menu-group"), emptyMsg = $("#searchEmpty");
+$("#searchInput").addEventListener("input", (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  let shown = 0;
+  cards.forEach((c) => {
+    const match = !q || c.textContent.toLowerCase().includes(q);
+    c.hidden = !match;
+    if (match) shown++;
+  });
+  groups.forEach((g) => (g.hidden = !$(".product-card:not([hidden])", g)));
+  emptyMsg.hidden = shown > 0;
+});
+/* Flip cards */
+cards.forEach((card) => {
+  const front = $(".flip-front", card);
+  const back = $(".flip-back", card);
+  const trigger = $(".flip-trigger", card);
 
-/*
-   IMPORTANT
+  const set = (on) => {
+    card.classList.toggle("is-flipped", on);
 
-   Replace this number with the real
-   Ceci & Sip WhatsApp number.
+    if (front) front.inert = on;
+    if (back) back.inert = !on;
 
-   Example:
-   919876543210
-*/
+    if (trigger) {
+      trigger.setAttribute("aria-expanded", String(on));
+    }
+  };
 
-const WHATSAPP_NUMBER =
-    "917019049479";
+  set(false);
 
+  card.addEventListener("click", (e) => {
+    if (e.target.closest(".add-button")) return;
+    set(!card.classList.contains("is-flipped"));
+  });
+});
 
+/* Cart */
+const KEY = "ceciandsip-cart";
+let cart = [];
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "[]");
+  if (Array.isArray(saved)) cart = saved.filter((i) => i && typeof i.name === "string" && i.price >= 0 && i.quantity > 0);
+} catch (_) {}
 
-/* =========================================================
-   WHATSAPP LINK
-========================================================= */
+const drawer = $("#cartDrawer"), overlay = $("#cartOverlay"), closeBtn = $("#closeCart");
+const itemsEl = $("#cartItems"), countEl = $("#cartCount"), totalEl = $("#cartTotal");
+let lastFocus = null;
 
-function createWhatsAppLink(message) {
+function openCart() {
+  lastFocus = document.activeElement;
+  drawer.inert = false;
+  drawer.classList.add("open"); overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  closeBtn.focus();
+}
+function closeCart() {
+  if (!drawer.classList.contains("open")) return;
+  drawer.classList.remove("open"); overlay.classList.remove("open");
+  drawer.inert = true;
+  document.body.style.overflow = "";
+  lastFocus?.focus?.();
+}
+$("#cartButton").addEventListener("click", openCart);
+closeBtn.addEventListener("click", closeCart);
+overlay.addEventListener("click", closeCart);
 
-    return (
-        "https://wa.me/" +
-        WHATSAPP_NUMBER +
-        "?text=" +
-        encodeURIComponent(message)
-    );
+const total = () => cart.reduce((s, i) => s + i.price * i.quantity, 0);
 
+function renderCart() {
+  countEl.textContent = cart.reduce((s, i) => s + i.quantity, 0);
+  totalEl.textContent = `₹${total()}`;
+  try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (_) {}
+  if (!cart.length) {
+    itemsEl.innerHTML = `<div class="empty-cart"><span>+</span><p>Your cart is empty.</p><small>Add something delicious from the menu.</small></div>`;
+    return;
+  }
+  itemsEl.innerHTML = cart.map((i, n) => `
+    <div class="cart-item">
+      <div><div class="cart-item-name">${esc(i.name)}</div>
+      <div class="cart-item-price">${i.price ? "₹" + i.price : "Included with bowl"}</div></div>
+      <div class="quantity">
+        <button type="button" data-act="minus" data-i="${n}" aria-label="Remove one ${esc(i.name)}">−</button>
+        <strong aria-live="polite">${i.quantity}</strong>
+        <button type="button" data-act="plus" data-i="${n}" aria-label="Add one ${esc(i.name)}">+</button>
+      </div>
+    </div>`).join("");
 }
 
-
-
-/* =========================================================
-   DOM READY
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-
-        /* =================================================
-           REDUCED MOTION
-        ================================================= */
-
-        const reducedMotion =
-            window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            );
-
-
-
-        /* =================================================
-           WHATSAPP
-        ================================================= */
-
-        const whatsappFloat =
-            document.getElementById(
-                "whatsappFloat"
-            );
-
-
-        if (whatsappFloat) {
-
-            whatsappFloat.href =
-                createWhatsAppLink(
-                    "Hi! I'd like to place an order at Ceci & Sip."
-                );
-
-        }
-
-
-        const whatsappCta =
-            document.getElementById(
-                "whatsappCta"
-            );
-
-
-        if (whatsappCta) {
-
-            whatsappCta.href =
-                createWhatsAppLink(
-                    "Hi! I'd like to place an order at Ceci & Sip."
-                );
-
-        }
-
-
-
-        /* =================================================
-           HERO VIDEO
-        ================================================= */
-
-        const heroVideo =
-            document.querySelector(
-                ".hero-video"
-            );
-
-
-        if (heroVideo) {
-
-            function playHeroVideo() {
-
-                if (
-                    reducedMotion.matches
-                ) {
-
-                    heroVideo.pause();
-
-                    return;
-
-                }
-
-
-                const promise =
-                    heroVideo.play();
-
-
-                if (promise) {
-
-                    promise.catch(
-                        () => {}
-                    );
-
-                }
-
-            }
-
-
-            if (
-                heroVideo.readyState >= 2
-            ) {
-
-                playHeroVideo();
-
-            } else {
-
-                heroVideo.addEventListener(
-                    "loadeddata",
-                    playHeroVideo,
-                    {
-                        once: true
-                    }
-                );
-
-            }
-
-
-            document.addEventListener(
-                "visibilitychange",
-                () => {
-
-                    if (
-                        document.hidden
-                    ) {
-
-                        heroVideo.pause();
-
-                    } else {
-
-                        playHeroVideo();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-
-        /* =================================================
-           DRESSING DATA
-        ================================================= */
-
-        const dressings = {
-
-            minty: {
-
-                name: "MINTY",
-
-                displayName: "Minty",
-
-                number: "01",
-
-                mood:
-                    "FRESH / CREAMY / HERBY",
-
-                copy:
-                    "Mint, plain yogurt, lemon, black pepper, salt, oregano and olive oil.",
-
-                image:
-                    "images/dish.jpg",
-
-                available: true
-
-            },
-
-
-            pane: {
-
-                name: "PANE",
-
-                displayName: "Pane",
-
-                number: "02",
-
-                mood:
-                    "CREAMY / ZESTY / RICH",
-
-                copy:
-                    "Paneer, olive oil, lemon, black pepper, salt, oregano and a touch of red colour.",
-
-                image:
-                    "images/hero-dish.jpg",
-
-                available: true
-
-            },
-
-
-            three: {
-
-                name: "COMING SOON",
-
-                displayName: "Coming soon",
-
-                number: "03",
-
-                mood:
-                    "A NEW FLAVOUR",
-
-                copy:
-                    "A new flavour is on its way.",
-
-                image:
-                    "images/dish.jpg",
-
-                available: false
-
-            },
-
-
-            four: {
-
-                name: "COMING SOON",
-
-                displayName: "Coming soon",
-
-                number: "04",
-
-                mood:
-                    "SOMETHING FRESH",
-
-                copy:
-                    "Something fresh is brewing.",
-
-                image:
-                    "images/dish.jpg",
-
-                available: false
-
-            },
-
-
-            five: {
-
-                name: "COMING SOON",
-
-                displayName: "Coming soon",
-
-                number: "05",
-
-                mood:
-                    "NEXT FAVOURITE",
-
-                copy:
-                    "Your next favourite might be this one.",
-
-                image:
-                    "images/dish.jpg",
-
-                available: false
-
-            }
-
-        };
-
-
-
-        /* =================================================
-           DRESSING ELEMENTS
-        ================================================= */
-
-        const dressingButtons =
-            document.querySelectorAll(
-                ".dressing-option"
-            );
-
-
-        const dressingImage =
-            document.getElementById(
-                "dressingImage"
-            );
-
-
-        const dressingStamp =
-            document.getElementById(
-                "dressingStamp"
-            );
-
-
-        const dressingNumber =
-            document.getElementById(
-                "dressingNumber"
-            );
-
-
-        const dressingLabel =
-            document.getElementById(
-                "dressingLabel"
-            );
-
-
-        const dressingMood =
-            document.getElementById(
-                "dressingMood"
-            );
-
-
-        const dressingCopy =
-            document.getElementById(
-                "dressingCopy"
-            );
-
-
-        const chooseDressing =
-            document.getElementById(
-                "chooseDressing"
-            );
-
-
-        const chooseDressingName =
-            document.getElementById(
-                "chooseDressingName"
-            );
-
-
-        let selectedDressing =
-            "minty";
-
-
-
-        /* =================================================
-           UPDATE DRESSING
-        ================================================= */
-
-        function updateDressing(key) {
-
-            const dressing =
-                dressings[key];
-
-
-            if (!dressing) {
-                return;
-            }
-
-
-            selectedDressing =
-                key;
-
-
-            /* Buttons */
-
-            dressingButtons.forEach(
-                (button) => {
-
-                    const isActive =
-                        button.dataset.dressing ===
-                        key;
-
-
-                    button.classList.toggle(
-                        "active",
-                        isActive
-                    );
-
-
-                    button.setAttribute(
-                        "aria-selected",
-                        isActive
-                            ? "true"
-                            : "false"
-                    );
-
-                }
-            );
-
-
-            /* Image */
-
-            if (dressingImage) {
-
-                dressingImage.style.opacity =
-                    "0";
-
-
-                setTimeout(
-                    () => {
-
-                        dressingImage.src =
-                            dressing.image;
-
-
-                        dressingImage.alt =
-                            `Ceci Bowl with ${dressing.displayName} dressing`;
-
-
-                        dressingImage.style.opacity =
-                            "1";
-
-                    },
-                    reducedMotion.matches
-                        ? 0
-                        : 130
-                );
-
-            }
-
-
-            /* Number */
-
-            if (dressingNumber) {
-
-                dressingNumber.textContent =
-                    dressing.number;
-
-            }
-
-
-            /* Name */
-
-            if (dressingStamp) {
-
-                dressingStamp.textContent =
-                    dressing.name;
-
-            }
-
-
-            if (dressingLabel) {
-
-                dressingLabel.textContent =
-                    dressing.name;
-
-            }
-
-
-            /* Mood */
-
-            if (dressingMood) {
-
-                dressingMood.textContent =
-                    dressing.mood;
-
-            }
-
-
-            /* Description */
-
-            if (dressingCopy) {
-
-                dressingCopy.textContent =
-                    dressing.copy;
-
-            }
-
-
-            /* Choose button */
-
-            if (chooseDressingName) {
-
-                chooseDressingName.textContent =
-                    dressing.displayName;
-
-            }
-
-
-            if (chooseDressing) {
-
-                chooseDressing.disabled =
-                    !dressing.available;
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           DRESSING BUTTON EVENTS
-        ================================================= */
-
-        dressingButtons.forEach(
-            (button) => {
-
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        updateDressing(
-                            button.dataset.dressing
-                        );
-
-                    }
-                );
-
-
-                button.addEventListener(
-                    "keydown",
-                    (event) => {
-
-                        if (
-                            event.key !== "ArrowDown" &&
-                            event.key !== "ArrowUp"
-                        ) {
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        const buttons =
-                            [...dressingButtons];
-
-
-                        const current =
-                            buttons.indexOf(
-                                button
-                            );
-
-
-                        const direction =
-                            event.key ===
-                            "ArrowDown"
-                                ? 1
-                                : -1;
-
-
-                        const next =
-                            (
-                                current +
-                                direction +
-                                buttons.length
-                            ) %
-                            buttons.length;
-
-
-                        buttons[next].focus();
-
-
-                        updateDressing(
-                            buttons[next]
-                                .dataset
-                                .dressing
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-
-        /* =================================================
-           ORDER SELECTED DRESSING
-        ================================================= */
-
-        if (chooseDressing) {
-
-            chooseDressing.addEventListener(
-                "click",
-                () => {
-
-                    const dressing =
-                        dressings[
-                            selectedDressing
-                        ];
-
-
-                    if (
-                        !dressing ||
-                        !dressing.available
-                    ) {
-                        return;
-                    }
-
-
-                    const message =
-                        `Hi! I'd like to order a Ceci Bowl with ${dressing.displayName} dressing.`;
-
-
-                    window.open(
-                        createWhatsAppLink(
-                            message
-                        ),
-                        "_blank",
-                        "noopener"
-                    );
-
-                }
-            );
-
-        }
-
-
-
-        /* =================================================
-           INGREDIENT MODAL
-        ================================================= */
-
-        const modal =
-            document.getElementById(
-                "ingredientModal"
-            );
-
-
-        const modalTitle =
-            document.getElementById(
-                "ingredientModalTitle"
-            );
-
-
-        const ingredientList =
-            modal
-                ? modal.querySelector(
-                    ".ingredient-list"
-                )
-                : null;
-
-
-        let lastFocused =
-            null;
-
-
-
-        /* =================================================
-           OPEN MODAL
-        ================================================= */
-
-        function openIngredientModal(
-            trigger
-        ) {
-
-            if (
-                !modal ||
-                !ingredientList
-            ) {
-                return;
-            }
-
-
-            lastFocused =
-                document.activeElement;
-
-
-            modalTitle.textContent =
-                trigger.dataset.dish || "";
-
-
-            ingredientList.innerHTML =
-                "";
-
-
-            const ingredients =
-                (
-                    trigger.dataset.ingredients ||
-                    ""
-                )
-                    .split("|")
-                    .map(
-                        item =>
-                            item.trim()
-                    )
-                    .filter(Boolean);
-
-
-            ingredients.forEach(
-                ingredient => {
-
-                    const li =
-                        document.createElement(
-                            "li"
-                        );
-
-
-                    li.textContent =
-                        ingredient;
-
-
-                    ingredientList.appendChild(
-                        li
-                    );
-
-                }
-            );
-
-
-            modal.classList.add(
-                "open"
-            );
-
-
-            modal.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            const closeButton =
-                modal.querySelector(
-                    ".modal-close"
-                );
-
-
-            if (closeButton) {
-
-                closeButton.focus();
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           CLOSE MODAL
-        ================================================= */
-
-        function closeIngredientModal() {
-
-            if (!modal) {
-                return;
-            }
-
-
-            modal.classList.remove(
-                "open"
-            );
-
-
-            modal.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-
-            document.body.style.overflow =
-                "";
-
-
-            if (lastFocused) {
-
-                lastFocused.focus();
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           INGREDIENT BUTTONS
-        ================================================= */
-
-        document
-            .querySelectorAll(
-                ".ingredient-button"
-            )
-            .forEach(
-                button => {
-
-                    button.addEventListener(
-                        "click",
-                        () => {
-
-                            openIngredientModal(
-                                button
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-
-
-        /* =================================================
-           CLOSE MODAL
-        ================================================= */
-
-        if (modal) {
-
-            modal
-                .querySelectorAll(
-                    "[data-close-modal]"
-                )
-                .forEach(
-                    element => {
-
-                        element.addEventListener(
-                            "click",
-                            closeIngredientModal
-                        );
-
-                    }
-                );
-
-        }
-
-
-
-        /* =================================================
-           ESCAPE
-        ================================================= */
-
-        document.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeIngredientModal();
-
-                }
-
-            }
-        );
-
-
-
-        /* =================================================
-           SMOOTH LINKS
-        ================================================= */
-
-        document
-            .querySelectorAll(
-                'a[href^="#"]'
-            )
-            .forEach(
-                link => {
-
-                    link.addEventListener(
-                        "click",
-                        event => {
-
-                            const id =
-                                link.getAttribute(
-                                    "href"
-                                );
-
-
-                            if (
-                                !id ||
-                                id === "#"
-                            ) {
-                                return;
-                            }
-
-
-                            const target =
-                                document.querySelector(
-                                    id
-                                );
-
-
-                            if (!target) {
-                                return;
-                            }
-
-
-                            event.preventDefault();
-
-
-                            target.scrollIntoView(
-                                {
-                                    behavior:
-                                        reducedMotion.matches
-                                            ? "auto"
-                                            : "smooth",
-
-                                    block:
-                                        "start"
-                                }
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-
-
-        /* =================================================
-           INITIAL DRESSING
-        ================================================= */
-
-        updateDressing("minty");
-
-    }
+itemsEl.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-act]");
+  if (!b) return;
+  const i = Number(b.dataset.i);
+  cart[i].quantity += b.dataset.act === "plus" ? 1 : -1;
+  if (cart[i].quantity <= 0) cart.splice(i, 1);
+  renderCart();
+});
+
+$$(".add-button").forEach((btn) =>
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const { name, price } = btn.closest(".product-card").dataset;
+    const found = cart.find((i) => i.name === name);
+    found ? found.quantity++ : cart.push({ name, price: Number(price) || 0, quantity: 1 });
+    renderCart();
+    openCart();
+  })
 );
+
+/* WhatsApp checkout */
+function orderMessage() {
+  if (!cart.length) return WA_DEFAULT;
+  const lines = cart.map((i) => `• ${i.name} × ${i.quantity}` + (i.price ? ` — ₹${i.price * i.quantity}` : ""));
+  return `Hi Ceci & Sip! I'd like to place an order:\n\n${lines.join("\n")}\n\nTotal: ₹${total()}`;
+}
+const order = () => window.open(waLink(orderMessage()), "_blank", "noopener");
+["#cartWhatsApp", "#orderNow", "#footerOrder"].forEach((s) => $(s)?.addEventListener("click", order));
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") { closeCart(); toggleMenu(false); }
+});
+
+/* Videos: lazy-load the 4-video strip, play only while visible */
+const hero = $(".hero video");
+if (reduceMotion && hero) hero.pause();
+const strip = $$(".video-col video");
+if (strip.length && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(({ target: v, isIntersecting }) => {
+      if (isIntersecting) {
+        if (!v.getAttribute("src") && v.dataset.src) v.src = v.dataset.src;
+        if (!reduceMotion) v.play().catch(() => {});
+      } else v.pause();
+    });
+  }, { threshold: 0.25 });
+  strip.forEach((v) => io.observe(v));
+}
+
+renderCart();

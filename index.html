@@ -1,1399 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Ceci & Sip — Fresh bowls, thoughtful dressings and refreshing sips.">
-
-    <meta name="theme-color"
-          content="#EC709A">
-
-    <title>Ceci & Sip — Fresh. Simple. Yours.</title>
-
-    <!-- =====================================================
-         BALOO THAMBI 2
-    ====================================================== -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link rel="stylesheet"
-          href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ceci &amp; Sip — Fresh. Simple. Yours.</title>
+<meta name="description" content="Fresh chickpea bowls, two signature dressings and natural sips, made from farm-fresh ingredients. Order on WhatsApp.">
+<meta name="theme-color" content="#EC709A">
+<!-- TODO: replace https://www.ceciandsip.com/ with your real domain -->
+<link rel="canonical" href="https://www.ceciandsip.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ceci &amp; Sip">
+<meta property="og:title" content="Ceci &amp; Sip — Fresh. Simple. Yours.">
+<meta property="og:description" content="Fresh bowls, thoughtful dressings and refreshing sips.">
+<meta property="og:url" content="https://www.ceciandsip.com/">
+<meta property="og:image" content="https://www.ceciandsip.com/images/hero-detail.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23ec709a'/%3E%3Ctext x='50' y='68' font-size='56' font-weight='800' text-anchor='middle' fill='%23171717' font-family='sans-serif'%3EC%26S%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FoodEstablishment","name":"Ceci & Sip","url":"https://www.ceciandsip.com/","telephone":"+917019049479","email":"ceciandsip@gmail.com","servesCuisine":"Healthy bowls and drinks","sameAs":["https://www.instagram.com/ceciandsip/"]}
+</script>
 </head>
-
-
 <body>
+<a class="skip-link" href="#top">Skip to content</a>
 
-
-<!-- =====================================================
-     NAVIGATION
-====================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20l1.2-4.5A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.7 8.4c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4-.1.6l-.6.7c.5.9 1.2 1.6 2.2 2l.7-.6c.2-.2.4-.2.6-.1l1.5.7c.2.1.3.3.3.5 0 .3-.1.8-.4 1.1-.3.3-.8.5-1.3.5-1.2 0-2.8-.6-4.2-2-1.3-1.3-2-2.9-2-4.1 0-.5.2-1 .4-1.3Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.2 4-2 1.5a15 15 0 0 0 6.3 6.3L17 13l4 1.2v3c0 1.1-.9 2-2 2C11.3 19.2 4.8 12.7 4.8 5c0-1.1.9-2 2.2-2Z"/></symbol>
+</svg>
 
 <header class="site-header">
+  <nav class="nav" aria-label="Main">
+    <a href="#top" class="brand">Ceci &amp; Sip</a>
 
-    <nav class="nav">
+    <div class="search-box">
+      <svg aria-hidden="true"><use href="#i-search"/></svg>
+      <input type="search" id="searchInput" placeholder="Search bowls, dressings or sips..." aria-label="Search menu" autocomplete="off">
+    </div>
 
-        <a href="#top"
-           class="brand">
+    <div class="nav-links" id="navLinks">
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#build">The Formula</a>
+    </div>
 
-            <span class="brand-mark">
-                C&S
-            </span>
+    <button class="cart-button" id="cartButton" type="button" aria-label="Open cart">
+      <span class="cart-icon"><svg aria-hidden="true"><use href="#i-cart"/></svg><span id="cartCount">0</span></span>
+      <span class="cart-text">Order</span>
+    </button>
 
-            <span class="brand-name">
-                Ceci & Sip
-            </span>
-
-        </a>
-
-
-        <div class="nav-links">
-
-            <a href="#story">
-                Story
-            </a>
-
-            <a href="#dressings">
-                Dressings
-            </a>
-
-            <a href="#build">
-                Build
-            </a>
-
-            <a href="#menu">
-                Menu
-            </a>
-
-        </div>
-
-
-        <a href="#order"
-           class="nav-order">
-
-            Order
-
-        </a>
-
-    </nav>
-
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
+  </nav>
 </header>
-
-
 
 <main id="top">
 
-
-<!-- =====================================================
-     HERO
-====================================================== -->
-
 <section class="hero">
-
-
-    <video
-        class="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        poster="images/hero-detail.jpg"
-        aria-hidden="true"
-    >
-
-        <source
-            src="images/hero-video.mp4"
-            type="video/mp4"
-        >
-
-    </video>
-
-
-    <div class="hero-overlay"></div>
-
-
-    <div class="hero-content">
-
-        <p class="eyebrow hero-eyebrow">
-            CECI & SIP / 01
-        </p>
-
-
-        <h1>
-
-            Fresh.<br>
-
-            <span>Simple.</span><br>
-
-            <strong>Yours.</strong>
-
-        </h1>
-
-
-        <p class="hero-description">
-
-            Fresh bowls, thoughtful dressings
-            and refreshing sips — made to
-            become your kind of meal.
-
-        </p>
-
-
-        <a href="#signature"
-           class="primary-button">
-
-            Discover the bowl
-
-            <span>↓</span>
-
-        </a>
-
-    </div>
-
-
-    <div class="hero-footer">
-
-        <span>
-            ONE BOWL. FIVE DRESSINGS.
-        </span>
-
-        <span>
-            TWO SIGNATURE SIPS.
-        </span>
-
-    </div>
-
+  <video autoplay muted loop playsinline preload="metadata" poster="images/hero.jpeg" aria-hidden="true">
+    <source src="images/hero45-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <p class="eyebrow">Ceci Bowl. Dressings. Sip's.</p>
+    <!-- <h1></h1> -->
+    <p class="hero-copy">A loaded Ceci bowl with your choice of dressing, paired with natural sips.</p>
+    <!-- <a href="#menu" class="btn btn-pink">Explore the menu</a> -->
+  </div>
 </section>
 
-
-
-<!-- =====================================================
-     SIGNATURE BOWL
-====================================================== -->
-
-<section
-    class="signature"
-    id="signature"
->
-
-
-    <div class="signature-copy">
-
-        <p class="eyebrow">
-            THE SIGNATURE / 02
-        </p>
-
-
-        <h2>
-
-            The Ceci
-            <span>Bowl.</span>
-
-        </h2>
-
-
-        <p class="large-copy">
-
-            Crisp vegetables, wholesome
-            chickpeas, fresh herbs and
-            your choice of dressing.
-
-        </p>
-
-
-        <p class="body-copy">
-
-            Simple ingredients.
-            Thoughtfully put together.
-            Made fresh after you order.
-
-        </p>
-
-
-        <div class="signature-points">
-
-            <span>01 / FRESH</span>
-
-            <span>02 / WHOLESOME</span>
-
-            <span>03 / MADE TO ORDER</span>
-
-        </div>
-
+<section class="section story" id="story">
+  <div class="wrap story-grid">
+    <div class="story-image">
+      <img src="images/the bowl.jpeg" alt="Fresh Ceci Bowl with chickpeas, cucumber and tomato" width="800" height="1000" loading="lazy">
+      <!-- <div class="story-badge"><b aria-hidden="true">🥒</b><span><strong>Farm fresh</strong>Picked locally, made to order</span></div> -->
     </div>
-
-
-
-    <div class="signature-visual">
-
-        <div class="yellow-circle"></div>
-
-        <div class="pink-circle"></div>
-
-
-        <img
-            src="images/hero-dish.jpg"
-            alt="The Ceci Bowl"
-        >
-
-
-        <span class="floating-label label-one">
-            THE CECI BOWL
-        </span>
-
-
-        <span class="floating-label label-two">
-            FRESH / SIMPLE / YOURS
-        </span>
-
+    <div class="story-content">
+      <p class="eyebrow">Our story</p>
+      <h2>Good food doesn’t need to be complicated. It just needs to be fresh.</h2>
+      <p class="large-copy">We source our ingredients from a fresh local farm, where crisp cucumbers, tender greens, coconuts and wholesome produce are grown naturally and brought to us at their freshest. We turn those simple ingredients into food and drinks that feel fresh, colourful and comforting.</p>
+      <p>Our Ceci Bowl brings together fresh ingredients with two signature dressings, giving you two completely different ways to enjoy the same bowl. For drinks, we keep things naturally refreshing: a creamy coconut smoothie and a cool cucumber margarita.</p>
+      <p>We don’t hide freshness behind complicated recipes. We let the ingredients speak for themselves.</p>
+      <p>From a quiet morning at the farm to the bowl and glass on your table, this is our little journey from earth to plate, and from plate to happiness.</p>
+      <!-- <ul class="story-pills"><li>Fresh ingredients</li><li>Made to order</li><li>Natural sips</li></ul> -->
     </div>
-
+  </div>
 </section>
 
-
-
-<!-- =====================================================
-     BRAND STRIP
-====================================================== -->
-
-<section class="brand-strip">
-
-    <div class="brand-strip-track">
-
-        <span>Fresh</span>
-        <b>✦</b>
-
-        <span>Simple</span>
-        <b>✦</b>
-
-        <span>Thoughtful</span>
-        <b>✦</b>
-
-        <span>Yours</span>
-        <b>✦</b>
-
-        <span>Fresh</span>
-        <b>✦</b>
-
-        <span>Simple</span>
-        <b>✦</b>
-
-        <span>Thoughtful</span>
-        <b>✦</b>
-
-        <span>Yours</span>
-        <b>✦</b>
-
+<section class="section menu-section" id="menu">
+  <div class="wrap">
+    <div class="section-heading">
+      <div><p class="eyebrow">Our menu</p><h2>The Good Stuff</h2></div>
+      <p>Choose your bowl, pick a dressing, then add a sip.</p>
     </div>
 
-</section>
+    <p class="search-empty" id="searchEmpty" hidden>No matches found. Try another search.</p>
 
-
-
-<!-- =====================================================
-     STORY
-====================================================== -->
-
-<section
-    class="story"
-    id="story"
->
-
-
-    <div class="story-number">
-        04
-    </div>
-
-
-    <div class="story-heading">
-
-        <p class="eyebrow">
-            A LITTLE FRESH. A LITTLE DIFFERENT.
-        </p>
-
-
-        <h2>
-
-            Food can be
-            <span>simple.</span>
-
-        </h2>
-
-    </div>
-
-
-    <div class="story-copy">
-
-        <p class="story-lead">
-
-            Ceci & Sip brings together
-            a wholesome bowl, thoughtful
-            dressings and refreshing drinks.
-
-        </p>
-
-
-        <p>
-
-            Familiar ingredients.
-            Balanced combinations.
-            Made fresh after you order.
-
-            The idea is simple:
-            start with something good,
-            then make it yours.
-
-        </p>
-
-
-        <a href="#dressings"
-           class="outline-link">
-
-            Choose your dressing
-
-            <span>→</span>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     DRESSING BAR
-====================================================== -->
-
-<section
-    class="dressings"
-    id="dressings"
->
-
-
-    <div class="dressings-heading">
-
-        <div>
-
-            <p class="eyebrow">
-                05 / THE DRESSING BAR
-            </p>
-
-
-            <h2>
-
-                One bowl.
-                <span>Your choice.</span>
-
-            </h2>
-
-        </div>
-
-
-        <p>
-
-            Every bowl comes with your choice
-            of dressing.
-
-            Pick the one that matches your
-            mood and make your bowl your own.
-
-        </p>
-
-    </div>
-
-
-
-    <div class="dressing-layout">
-
-
-        <!-- VISUAL -->
-
-        <div class="dressing-visual">
-
-            <div class="dressing-yellow"></div>
-
-
-            <div class="dressing-image">
-
-                <img
-                    id="dressingImage"
-                    src="images/dish.jpg"
-                    alt="Ceci Bowl with Minty dressing"
-                >
-
+    <div class="menu-group" id="bowls">
+      <div class="category-heading"><h3>Bowls</h3></div>
+      <div class="product-grid bowl-grid">
+        <article class="product-card" data-name="The Ceci Bowl" data-price="120">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="product-image">
+                <img src="images/the bowl.jpeg" alt="The Ceci Bowl" width="600" height="600" loading="lazy">
+                <button class="flip-trigger" type="button" aria-label="Show ingredients">i</button>
+              </div>
+              <div class="product-info">
+                <span class="product-tag">Bowl</span>
+                <h4>The Ceci Bowl</h4>
+                <div class="product-bottom"><strong>₹299</strong><button class="add-button" type="button" aria-label="Add The Ceci Bowl to cart">+</button></div>
+              </div>
             </div>
-
-
-            <div
-                class="dressing-stamp"
-                id="dressingStamp"
-            >
-                MINTY
+            <div class="flip-back">
+              <span class="product-tag">Ingredients</span>
+              <h4>The Ceci Bowl</h4>
+              <ul><li>Lemon</li><li>Onions</li><li>Tomato</li><li>Lettuce</li><li>Chickpeas</li><li>Coriander</li><li>Cucumber</li></ul>
+              <button class="flip-back-button" type="button">← Back</button>
             </div>
-
-
-            <div
-                class="dressing-number"
-                id="dressingNumber"
-            >
-                01
-            </div>
-
-        </div>
-
-
-
-        <!-- CONTROLS -->
-
-        <div class="dressing-controls">
-
-
-            <p class="eyebrow">
-                SELECT YOUR DRESSING
-            </p>
-
-
-            <div
-                class="dressing-list"
-                role="tablist"
-            >
-
-
-                <button
-                    type="button"
-                    class="dressing-option active"
-                    data-dressing="minty"
-                    role="tab"
-                    aria-selected="true"
-                >
-
-                    <span>
-                        01
-                    </span>
-
-                    <strong>
-                        MINTY
-                    </strong>
-
-                    <b>
-                        ↗
-                    </b>
-
-                </button>
-
-
-
-                <button
-                    type="button"
-                    class="dressing-option"
-                    data-dressing="pane"
-                    role="tab"
-                    aria-selected="false"
-                >
-
-                    <span>
-                        02
-                    </span>
-
-                    <strong>
-                        PANE
-                    </strong>
-
-                    <b>
-                        ↗
-                    </b>
-
-                </button>
-
-
-
-                <button
-                    type="button"
-                    class="dressing-option coming-soon"
-                    data-dressing="three"
-                    role="tab"
-                    aria-selected="false"
-                >
-
-                    <span>
-                        03
-                    </span>
-
-                    <strong>
-                        COMING SOON
-                    </strong>
-
-                    <b>
-                        +
-                    </b>
-
-                </button>
-
-
-
-                <button
-                    type="button"
-                    class="dressing-option coming-soon"
-                    data-dressing="four"
-                    role="tab"
-                    aria-selected="false"
-                >
-
-                    <span>
-                        04
-                    </span>
-
-                    <strong>
-                        COMING SOON
-                    </strong>
-
-                    <b>
-                        +
-                    </b>
-
-                </button>
-
-
-
-                <button
-                    type="button"
-                    class="dressing-option coming-soon"
-                    data-dressing="five"
-                    role="tab"
-                    aria-selected="false"
-                >
-
-                    <span>
-                        05
-                    </span>
-
-                    <strong>
-                        COMING SOON
-                    </strong>
-
-                    <b>
-                        +
-                    </b>
-
-                </button>
-
-
-            </div>
-
-
-
-            <div class="dressing-info">
-
-                <div>
-
-                    <strong id="dressingLabel">
-                        MINTY
-                    </strong>
-
-                    <span id="dressingMood">
-                        FRESH / CREAMY / HERBY
-                    </span>
-
-                </div>
-
-
-                <p id="dressingCopy">
-
-                    Mint, plain yogurt, lemon,
-                    black pepper, salt, oregano
-                    and olive oil.
-
-                </p>
-
-            </div>
-
-
-
-            <button
-                type="button"
-                class="choose-dressing"
-                id="chooseDressing"
-            >
-
-                Choose
-
-                <span id="chooseDressingName">
-                    Minty
-                </span>
-
-                <b>
-                    →
-                </b>
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     BUILD YOUR BOWL
-====================================================== -->
-
-<section
-    class="build"
-    id="build"
->
-
-
-    <div class="build-heading">
-
-        <p class="eyebrow">
-            06 / THE RITUAL
-        </p>
-
-
-        <h2>
-
-            Build
-            <span>your bowl.</span>
-
-        </h2>
-
-
-        <p>
-
-            Four simple choices.
-            One bowl made your way.
-
-        </p>
-
-    </div>
-
-
-
-    <div class="build-steps">
-
-
-        <div class="build-line"></div>
-
-
-
-        <article class="build-step">
-
-            <div class="step-number">
-                01
-            </div>
-
-            <div>
-
-                <p class="step-label">
-                    START HERE
-                </p>
-
-                <h3>
-                    Pick your bowl.
-                </h3>
-
-                <p>
-                    Start with our fresh
-                    signature salad.
-                </p>
-
-            </div>
-
+          </div>
         </article>
-
-
-
-        <article class="build-step step-offset">
-
-            <div class="step-number">
-                02
-            </div>
-
-            <div>
-
-                <p class="step-label">
-                    MAKE IT YOURS
-                </p>
-
-                <h3>
-                    Choose your dressing.
-                </h3>
-
-                <p>
-                    Pick the flavour that
-                    matches your mood.
-                </p>
-
-            </div>
-
-        </article>
-
-
-
-        <article class="build-step">
-
-            <div class="step-number">
-                03
-            </div>
-
-            <div>
-
-                <p class="step-label">
-                    ADD A SIP
-                </p>
-
-                <h3>
-                    Pick your drink.
-                </h3>
-
-                <p>
-                    Go creamy with Mori
-                    or refreshing with Jolt.
-                </p>
-
-            </div>
-
-        </article>
-
-
-
-        <article class="build-step step-offset">
-
-            <div class="step-number">
-                04
-            </div>
-
-            <div>
-
-                <p class="step-label">
-                    THAT'S IT
-                </p>
-
-                <h3>
-                    Made fresh.
-                </h3>
-
-                <p>
-                    Your bowl is prepared
-                    after you order.
-                </p>
-
-            </div>
-
-        </article>
-
+      </div>
     </div>
 
-
-    <div class="build-footer">
-
-        <span>
-            YOUR BOWL / YOUR WAY
-        </span>
-
-
-        <a href="#order"
-           class="yellow-link">
-
-            Build yours →
-
-        </a>
-
+    <div class="menu-group" id="dressings">
+      <div class="category-heading"><h3>Dressings</h3></div>
+      <div class="product-grid two-columns">
+        <article class="product-card" data-name="Paneer Dressing" data-price="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="product-image">
+                <img src="images/paneer.jpeg" alt="Paneer dressing" width="600" height="600" loading="lazy">
+                <button class="flip-trigger" type="button" aria-label="Show ingredients">i</button>
+              </div>
+              <div class="product-info">
+                <span class="product-tag">Dressing</span>
+                <h4>Paneer</h4>
+                <div class="product-bottom"><span class="included">Included with bowl</span><button class="add-button" type="button" aria-label="Add Paneer dressing to cart">+</button></div>
+              </div>
+            </div>
+            <div class="flip-back">
+              <span class="product-tag">Ingredients</span>
+              <h4>Paneer</h4>
+              <ul><li>Paneer</li><li>Seasoning</li><li>Mint leaves</li></ul>
+              <button class="flip-back-button" type="button">← Back</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card" data-name="Yogurt Dressing" data-price="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="product-image">
+                <img src="images/yogurt.jpeg" alt="Yogurt dressing" width="600" height="600" loading="lazy">
+                <button class="flip-trigger" type="button" aria-label="Show ingredients">i</button>
+              </div>
+              <div class="product-info">
+                <span class="product-tag">Dressing</span>
+                <h4>Yogurt</h4>
+                <div class="product-bottom"><span class="included">Included with bowl</span><button class="add-button" type="button" aria-label="Add Yogurt dressing to cart">+</button></div>
+              </div>
+            </div>
+            <div class="flip-back">
+              <span class="product-tag">Ingredients</span>
+              <h4>Yogurt</h4>
+              <ul><li>Olive oil</li><li>Seasoning</li><li>Black pepper</li></ul>
+              <button class="flip-back-button" type="button">← Back</button>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
 
+    <div class="menu-group" id="sips">
+      <div class="category-heading"><h3>Sips</h3></div>
+      <div class="product-grid two-columns">
+        <article class="product-card" data-name="Coconut Smoothie" data-price="80">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="product-image">
+                <img src="images/coconut smoothie.jpeg" alt="Coconut smoothie" width="600" height="600" loading="lazy">
+                <!-- <button class="flip-trigger" type="button" aria-label="Show ingredients">i</button> -->
+              </div>
+              <div class="product-info">
+                <span class="product-tag">Sip</span>
+                <h4>Coconut Smoothie</h4>
+                <div class="product-bottom"><strong>₹180</strong><button class="add-button" type="button" aria-label="Add Coconut Smoothie to cart">+</button></div>
+              </div>
+            </div>
+            <div class="flip-back">
+              <span class="product-tag">Ingredients</span>
+              <h4>Coconut Smoothie</h4>
+              <ul><li>Cold milk</li><li>Condensed milk</li><li>Grated coconut</li><li>Cinnamon powder</li></ul>
+              <!-- <button class="flip-back-button" type="button"></button> -->
+            </div>
+          </div>
+        </article>
+        <article class="product-card" data-name="Cucumber Margarita" data-price="70">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="product-image">
+                <img src="images/cucumber.jpeg" alt="Cucumber margarita" width="600" height="600" loading="lazy">
+                <button class="flip-trigger" type="button" aria-label="Show ingredients">i</button>
+              </div>
+              <div class="product-info">
+                <span class="product-tag">Sip</span>
+                <h4>Cucumber Margarita</h4>
+                <div class="product-bottom"><strong>₹160</strong><button class="add-button" type="button" aria-label="Add Cucumber Margarita to cart">+</button></div>
+              </div>
+            </div>
+            <div class="flip-back">
+              <span class="product-tag">Ingredients</span>
+              <h4>Cucumber Margarita</h4>
+              <ul><li>Sugar</li><li>Lemon</li><li>Mint leaves</li><li>Cucumber</li><li>Black pepper</li></ul>
+              <!-- <button class="flip-back-button" type="button">← Back</button> -->
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-
-<!-- =====================================================
-     MENU
-====================================================== -->
-
-<section
-    class="menu"
-    id="menu"
->
-
-
-    <div class="menu-heading">
-
-        <div>
-
-            <p class="eyebrow">
-                07 / THE MENU
-            </p>
-
-
-            <h2>
-
-                Made fresh.
-                <span>Made simple.</span>
-
-            </h2>
-
-        </div>
-
-
-        <p>
-            Three signatures.
-            No complicated menu.
-        </p>
-
+<section class="section build-section" id="build">
+  <div class="wrap">
+    <div class="build-header">
+      <p class="eyebrow">The formula</p>
+      <h2>Pick it. Dress it. Sip it.</h2>
     </div>
-
-
-
-    <div class="menu-grid">
-
-
-        <!-- BOWL -->
-
-        <article class="menu-card menu-large">
-
-            <div class="menu-image">
-
-                <img
-                    src="images/dish.jpg"
-                    alt="The Ceci Bowl"
-                    loading="lazy"
-                >
-
-            </div>
-
-
-            <div class="menu-meta">
-
-                <span>
-                    01 / BOWL
-                </span>
-
-                <span>
-                    THE CECI BOWL
-                </span>
-
-            </div>
-
-
-            <h3>
-                The Ceci Bowl
-            </h3>
-
-
-            <p>
-
-                Fresh lettuce, cucumber,
-                onion, tomato, chickpeas
-                and coriander.
-
-            </p>
-
-
-            <button
-                type="button"
-                class="ingredient-button"
-                data-dish="The Ceci Bowl"
-                data-ingredients="Fresh Lettuce — our crisp base.|Cucumber — fresh, cool and crunchy.|Onion — finely chopped for a sharp little kick.|Tomato — juicy and vibrant.|Chickpeas — tender and wholesome.|Coriander — a fresh finishing touch."
-            >
-
-                See ingredients
-                ↗
-
-            </button>
-
-        </article>
-
-
-
-        <!-- MORI -->
-
-        <article class="menu-card">
-
-            <div class="menu-image">
-
-                <img
-                    src="images/drink.jpg"
-                    alt="Mori coconut drink"
-                    loading="lazy"
-                >
-
-            </div>
-
-
-            <div class="menu-meta">
-
-                <span>
-                    02 / SIP
-                </span>
-
-                <span>
-                    MORI
-                </span>
-
-            </div>
-
-
-            <h3>
-                Mori
-            </h3>
-
-
-            <p>
-
-                A smooth, creamy coconut drink
-                with real grated coconut and
-                condensed milk, served chilled.
-
-            </p>
-
-
-            <button
-                type="button"
-                class="ingredient-button"
-                data-dish="Mori"
-                data-ingredients="Coconut milk|Real grated coconut|Condensed milk|Ice"
-            >
-
-                See ingredients
-                ↗
-
-            </button>
-
-        </article>
-
-
-
-        <!-- JOLT -->
-
-        <article class="menu-card">
-
-            <div class="menu-image">
-
-                <img
-                    src="images/drink-2.jpg"
-                    alt="Jolt cucumber drink"
-                    loading="lazy"
-                >
-
-            </div>
-
-
-            <div class="menu-meta">
-
-                <span>
-                    03 / SIP
-                </span>
-
-                <span>
-                    JOLT
-                </span>
-
-            </div>
-
-
-            <h3>
-                Jolt
-            </h3>
-
-
-            <p>
-
-                Cucumber, lemon, mint and
-                ginger with a subtle kick
-                of black pepper and salt.
-
-            </p>
-
-
-            <button
-                type="button"
-                class="ingredient-button"
-                data-dish="Jolt"
-                data-ingredients="Cucumber|Lemon|Mint|Ginger|Black pepper|Salt|Ice"
-            >
-
-                See ingredients
-                ↗
-
-            </button>
-
-        </article>
-
-    </div>
-
+    <ol class="build-steps">
+      <li class="build-step"><span>01</span><h3>Pick your bowl</h3><p>Start with our fresh signature bowl.</p></li>
+      <li class="build-step"><span>02</span><h3>Choose your dressing</h3><p>Go fresh with paneer or yogurt.</p></li>
+      <li class="build-step"><span>03</span><h3>Pick your drink</h3><p>Finish with a coconut smoothie or cucumber margarita.</p></li>
+    </ol>
+  </div>
 </section>
 
-
-
-<!-- =====================================================
-     WHY CECI
-====================================================== -->
-
-<section class="difference">
-
-
-    <div>
-
-        <p class="eyebrow">
-            08 / WHY CECI & SIP
-        </p>
-
-
-        <h2>
-
-            Less noise.
-            <span>More good.</span>
-
-        </h2>
-
-    </div>
-
-
-
-    <div class="difference-list">
-
-
-        <div class="difference-row">
-
-            <span>
-                01
-            </span>
-
-            <h3>
-                Simple ingredients
-            </h3>
-
-            <p>
-                Familiar food,
-                thoughtfully combined.
-            </p>
-
-        </div>
-
-
-        <div class="difference-row">
-
-            <span>
-                02
-            </span>
-
-            <h3>
-                Made to order
-            </h3>
-
-            <p>
-                Prepared fresh after
-                you place your order.
-            </p>
-
-        </div>
-
-
-        <div class="difference-row">
-
-            <span>
-                03
-            </span>
-
-            <h3>
-                Your choice
-            </h3>
-
-            <p>
-                One bowl.
-                Different moods.
-                Your dressing.
-            </p>
-
-        </div>
-
-    </div>
-
+<section class="order-section">
+  <div class="wrap order-content">
+    <p class="eyebrow">Ready when you are</p>
+    <h2>Your bowl. Your dressing. Your sip.</h2>
+    <p>Add your favourites to the cart and send your order straight to us on WhatsApp.</p>
+    <button class="btn btn-ink" id="orderNow" type="button">Order on WhatsApp</button>
+  </div>
 </section>
 
-
-
-<!-- =====================================================
-     INGREDIENT JOURNEY
-====================================================== -->
-
-<section class="journey">
-
-
-    <div class="journey-copy">
-
-        <p class="eyebrow">
-            09 / FROM SOURCE TO BOWL
-        </p>
-
-
-        <h2>
-
-            Keep it simple.
-            <span>Make it good.</span>
-
-        </h2>
-
-
-        <p>
-
-            Good food doesn't need
-            a long explanation.
-
-            It needs ingredients that
-            work together and care
-            in the making.
-
-        </p>
-
-
-        <strong>
-            FRESH INGREDIENTS /
-            SIMPLE IDEAS /
-            BETTER COMBINATIONS
-        </strong>
-
+<section class="video-section" aria-labelledby="videoTitle">
+  <div class="wrap">
+    <div class="section-heading">
+      <div><p class="eyebrow">Fresh from the farm</p><h2 id="videoTitle">Made fresh, every day</h2></div>
     </div>
+    <div class="video-frame">
+      <!-- <div class="video-col"><video muted loop playsinline preload="none" data-src="images/fv1.jpeg" aria-hidden="true"></video></div> -->
+      <div class="video-col"> <img src="images/fv1.jpeg" alt="Fresh ingredients from the farm" loading="lazy" > </div>
+      <div class="video-col"> <img src="images/fv2.jpeg" alt="Fresh ingredients from the farm" loading="lazy" > </div>
+      <div class="video-col"> <img src="images/fv3.jpeg" alt="Fresh ingredients from the farm" loading="lazy" > </div>
+      <div class="video-col"> <img src="images/fv4.jpeg" alt="Fresh ingredients from the farm" loading="lazy" > </div>
 
-
-
-    <div class="ingredient-collage">
-
-
-        <div class="ingredient-card ingredient-one">
-
-            <img
-                src="images/ingredient-1.jpg"
-                alt="Fresh ingredient"
-                loading="lazy"
-            >
-
-            <span>
-                01 / FRESH
-            </span>
-
-        </div>
-
-
-        <div class="ingredient-card ingredient-two">
-
-            <img
-                src="images/ingredient-2.jpg"
-                alt="Natural ingredient"
-                loading="lazy"
-            >
-
-            <span>
-                02 / SIMPLE
-            </span>
-
-        </div>
-
-
-        <div class="ingredient-card ingredient-three">
-
-            <img
-                src="images/ingredient-3.jpg"
-                alt="Ingredient preparation"
-                loading="lazy"
-            >
-
-            <span>
-                03 / THOUGHTFUL
-            </span>
-
-        </div>
-
+      <!-- <div class="video-col"><video muted loop playsinline preload="none" data-src="images/video-2.mp4" aria-hidden="true"></video></div>
+      <div class="video-col"><video muted loop playsinline preload="none" data-src="images/video-3.mp4" aria-hidden="true"></video></div>
+      <div class="video-col"><video muted loop playsinline preload="none" data-src="images/video-4.mp4" aria-hidden="true"></video></div> -->
     </div>
-
+  </div>
 </section>
-
-
-
-<!-- =====================================================
-     ORDER
-====================================================== -->
-
-<section
-    class="order"
-    id="order"
->
-
-
-    <div class="order-content">
-
-        <p class="eyebrow">
-            10 / READY WHEN YOU ARE
-        </p>
-
-
-        <h2>
-
-            Choose your bowl.<br>
-
-            <span>
-                Pick your dressing.
-            </span><br>
-
-            Add your sip.
-
-        </h2>
-
-
-        <p>
-
-            No complicated checkout.
-            Just message us on WhatsApp.
-
-        </p>
-
-
-        <div class="order-actions">
-
-            <a
-                href="#"
-                id="whatsappCta"
-                class="order-button"
-                target="_blank"
-                rel="noopener"
-            >
-
-                Order on WhatsApp
-                →
-
-            </a>
-
-
-            <a
-                href="#dressings"
-                class="white-link"
-            >
-
-                Choose a dressing
-                ↗
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
 
 </main>
 
-
-
-<!-- =====================================================
-     INGREDIENT MODAL
-====================================================== -->
-
-<div
-    class="modal"
-    id="ingredientModal"
-    aria-hidden="true"
->
-
-    <div
-        class="modal-backdrop"
-        data-close-modal
-    ></div>
-
-
-    <div
-        class="modal-box"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="ingredientModalTitle"
-    >
-
-        <button
-            type="button"
-            class="modal-close"
-            data-close-modal
-            aria-label="Close"
-        >
-            ×
-        </button>
-
-
-        <p class="eyebrow">
-            INGREDIENTS
-        </p>
-
-
-        <h3 id="ingredientModalTitle"></h3>
-
-
-        <ul
-            class="ingredient-list"
-        ></ul>
-
+<footer class="footer" id="contact">
+  <div class="wrap footer-main">
+    <div class="footer-brand">
+      <a href="#top" class="footer-logo">Ceci <span>&amp;</span> Sip</a>
+      <p>Bowls. Dressings. Sips.</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ceciandsip/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+        <a href="#" data-wa target="_blank" rel="noopener" aria-label="WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+        <a href="mailto:ceciandsip@gmail.com" aria-label="Email"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+        <a href="tel:+917019049479" aria-label="Phone"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+      </div>
     </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     FLOATING WHATSAPP
-====================================================== -->
-
-<a
-    href="#"
-    id="whatsappFloat"
-    class="whatsapp"
-    target="_blank"
-    rel="noopener"
-    aria-label="Order on WhatsApp"
->
-    WA
-</a>
-
-
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-
-<footer class="footer">
-
-    <strong>
-        CECI & SIP
-    </strong>
-
-    <span>
-        Fresh. Simple. Yours.
-    </span>
-
-    <span>
-        © 2026 Ceci & Sip
-    </span>
-
+    <div class="footer-column">
+      <h4>Shop</h4>
+      <a href="#bowls">Bowls</a><a href="#dressings">Dressings</a><a href="#sips">Sips</a>
+    </div>
+    <div class="footer-column">
+      <h4>About</h4>
+      <a href="#story">Our Story</a><a href="#build">The Formula</a>
+    </div>
+    <div class="footer-column">
+      <h4>Connect</h4>
+      <a href="https://www.instagram.com/ceciandsip/" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:ceciandsip@gmail.com">ceciandsip@gmail.com</a>
+      <a href="tel:+917019049479">+91 70190 49479</a>
+    </div>
+    <div class="footer-order">
+      <h4>Order</h4>
+      <button class="whatsapp-button" id="footerOrder" type="button"><svg aria-hidden="true"><use href="#i-wa"/></svg>Order on WhatsApp</button>
+    </div>
+  </div>
+  <div class="wrap footer-bottom"><span>© 2026 Ceci &amp; Sip. All rights reserved.</span></div>
 </footer>
 
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" inert>
+  <div class="cart-header">
+    <div><span class="eyebrow">Your order</span><h3>Your Cart</h3></div>
+    <button id="closeCart" class="close-cart" type="button" aria-label="Close cart">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+    <button class="btn btn-pink full" id="cartWhatsApp" type="button">Order on WhatsApp</button>
+  </div>
+</aside>
 
+<a href="#" class="whatsapp-float" data-wa target="_blank" rel="noopener" aria-label="Order on WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
-<script
-    src="js/main.js"
-    defer
-></script>
-
-
+<script src="js/main.js" defer></script>
 </body>
 </html>
